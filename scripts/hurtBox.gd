@@ -18,6 +18,8 @@ func _on_area_entered(hitbox: hitBox):
 		if hitbox.owner is player:
 			get_parent().spr.texture = get_parent().hitSprite 
 			get_parent().sound.play()
+			if hitbox.owner.currentItem == null:
+				hitbox.owner.currentItem = get_parent().itemDict[hitbox.owner.currentWorld].instantiate()
 			call_deferred("queue_free")
 	if owner is finish:
 		if hitbox.owner is player:
@@ -25,4 +27,6 @@ func _on_area_entered(hitbox: hitBox):
 			get_tree().root.get_node("gameManager/currentLevel").shouldSpawnFLine = true
 			owner.announce()
 			call_deferred("queue_free")
-			
+	if owner is enemy:
+		if hitbox.owner.is_in_group("projectile"):
+			owner.die()			

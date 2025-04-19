@@ -13,6 +13,10 @@ var brake = -450
 @onready var roadHitbox: Area2D = get_node("Area2D")
 var score := 1.0
 var currentWorld := "debug"
+var currentItem: item :
+	set(value):
+		currentItem = value 
+		get_tree().root.get_node("gameManager").add_child(currentItem)
 
 func _physics_process(delta):
 	acc = Vector2.ZERO
@@ -44,6 +48,8 @@ func applyFric():
 	
 func getInput():
 	var turn = 0
+	if Input.is_action_just_pressed("item"):
+		currentItem.activate()
 	if Input.is_action_pressed("left"):
 		turn -= 1
 	if Input.is_action_pressed("right"):

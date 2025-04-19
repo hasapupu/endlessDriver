@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dogqlv5tktog7"]
+
+[ext_resource type="Script" path="res://scripts/physicsObject.gd" id="1_7uvbb"]
+[ext_resource type="Texture2D" uid="uid://ct7jcukjdx6my" path="res://sprites/shell.png" id="1_dkune"]
+[ext_resource type="Script" path="res://scripts/hitBox.gd" id="2_3d0kd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xna7x"]
+size = Vector2(19, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f8iw2"]
+radius = 7.0
+height = 18.0
+
+[node name="Node2D" type="CharacterBody2D"]
+script = ExtResource("1_7uvbb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 3
+rotation = -0.00267149
+texture = ExtResource("1_dkune")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_xna7x")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("2_3d0kd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["projectile"]]
+position = Vector2(-2, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_f8iw2")
+debug_color = Color(1, 0.0139506, 0.0042923, 0.42)

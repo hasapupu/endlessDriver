@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccellp2fexbpo"]
+
+[ext_resource type="Script" path="res://scripts/shellItem.gd" id="1_ycpep"]
+[ext_resource type="PackedScene" uid="uid://dogqlv5tktog7" path="res://shell.tscn" id="2_hp7rp"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ycpep")
+
+[node name="shell" parent="." instance=ExtResource("2_hp7rp")]
+
+[editable path="shell"]

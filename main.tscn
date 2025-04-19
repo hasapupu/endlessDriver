@@ -44,6 +44,11 @@ bbcode_enabled = true
 text = "Score:[shake][rainbow]1"
 script = ExtResource("6_v8rr0")
 
+[node name="Container" type="Container" parent="CanvasLayer"]
+offset_left = 221.0
+offset_right = 261.0
+offset_bottom = 40.0
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true

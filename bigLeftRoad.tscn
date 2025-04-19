@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7wwhwd76pjr4"]
+
+[ext_resource type="Script" path="res://scripts/heteroad.gd" id="1_xwh0b"]
+[ext_resource type="PackedScene" uid="uid://imle1bx8sljn" path="res://straightRoad.tscn" id="2_i4irh"]
+[ext_resource type="Texture2D" uid="uid://c0eyv8e8o0qti" path="res://sprites/bigLefttRoad.png" id="3_sw6ho"]
+[ext_resource type="Script" path="res://scripts/road.gd" id="4_e6k2x"]
+[ext_resource type="Texture2D" uid="uid://gg234mj2l3co" path="res://cones1.png" id="5_cgt67"]
+[ext_resource type="Script" path="res://scripts/pickup.gd" id="5_cmn7i"]
+[ext_resource type="Script" path="res://scripts/hurtBox.gd" id="6_ev2qm"]
+[ext_resource type="AudioStream" uid="uid://cw12lxyymnwg6" path="res://sfx/cone.wav" id="8_5kh0d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dh18j"]
+size = Vector2(100, 20)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_xwh0b")
+endAngle = 90.0
+type = "BIGLEFT"
+
+[node name="Sprite2D" parent="." instance=ExtResource("2_i4irh")]
+position = Vector2(0, 150)
+texture = ExtResource("3_sw6ho")
+
+[node name="endPoint" type="Node2D" parent="."]
+position = Vector2(-150, 150)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("4_e6k2x")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, 150)
+polygon = PackedVector2Array(49, -150, 49, 9, 35, 36, 10, 49, -150, 51, -150, -50, -124, -50, -79, -49, -50, -49, -49, -150)
+
+[node name="Area2D2" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -85)
+script = ExtResource("5_cmn7i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(0, 150)
+shape = SubResource("RectangleShape2D_dh18j")
+debug_color = Color(0.533333, 0.501961, 1, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D2"]
+z_index = 1
+position = Vector2(0, 242)
+texture = ExtResource("5_cgt67")
+
+[node name="hurtBox" type="Area2D" parent="Area2D2"]
+script = ExtResource("6_ev2qm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2/hurtBox"]
+position = Vector2(0, 150)
+shape = SubResource("RectangleShape2D_dh18j")
+disabled = true
+debug_color = Color(0.533333, 0.501961, 1, 0.419608)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Area2D2"]
+position = Vector2(0, 85)
+stream = ExtResource("8_5kh0d")
+volume_db = -5.942
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_enter"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_exit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

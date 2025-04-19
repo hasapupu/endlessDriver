@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://imle1bx8sljn"]
+
+[ext_resource type="Texture2D" uid="uid://dcx3j1maeq7lp" path="res://sprites/heteRoad.png" id="1_d2wta"]
+
+[node name="Sprite2D" type="Sprite2D"]
+visibility_layer = 128
+texture = ExtResource("1_d2wta")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://kejufj47t3e6"]
+
+[ext_resource type="Texture2D" uid="uid://c2ebfcqts5qwo" path="res://sprites/finishLine.png" id="1_nsp6u"]
+[ext_resource type="Script" path="res://scripts/finishLine.gd" id="2_cp4sp"]
+[ext_resource type="Script" path="res://scripts/hurtBox.gd" id="2_jva85"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mo5sa"]
+size = Vector2(100, 20)
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = ExtResource("1_nsp6u")
+script = ExtResource("2_cp4sp")
+
+[node name="hurtBox" type="Area2D" parent="."]
+script = ExtResource("2_jva85")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
+shape = SubResource("RectangleShape2D_mo5sa")
+debug_color = Color(0.375535, 0.614317, 9.62615e-07, 0.42)

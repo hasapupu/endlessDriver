@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbc1h5o7go7li"]
+
+[ext_resource type="PackedScene" uid="uid://dyr67b72ylhmr" path="res://player.tscn" id="1_lto2w"]
+[ext_resource type="Script" path="res://scripts/levelGen.gd" id="2_s31bt"]
+[ext_resource type="PackedScene" uid="uid://8bg8cbtfryym" path="res://heteroad.tscn" id="3_aiu1k"]
+[ext_resource type="Texture2D" uid="uid://cwa1he6pbyj0l" path="res://sprites/defBg.png" id="4_2xw58"]
+[ext_resource type="Script" path="res://scripts/pBG.gd" id="5_6ases"]
+[ext_resource type="FontFile" uid="uid://beaibaf8hsj5u" path="res://PressStart2P-vaV7.ttf" id="5_mfgmh"]
+[ext_resource type="Script" path="res://scripts/scoreText.gd" id="6_v8rr0"]
+[ext_resource type="AudioStream" uid="uid://ckjnt1y7c170m" path="res://sfx/raceism.wav" id="7_glecp"]
+
+[node name="gameManager" type="Node"]
+
+[node name="pp" type="Node2D" parent="."]
+
+[node name="player" parent="pp" instance=ExtResource("1_lto2w")]
+
+[node name="musicMan" type="AudioStreamPlayer2D" parent="."]
+
+[node name="currentLevel" type="Node" parent="."]
+script = ExtResource("2_s31bt")
+levelPrefs = ["res://heteroad.tscn", "res://smallLeftRoad.tscn", "res://bigLeftRoad.tscn", "res://bigRightRoad.tscn", "res://heteroad.tscn", "res://heteroad.tscn", "res://heteroad.tscn", "res://heteroad.tscn", "res://smallLeftRoad.tscn", "res://bigLeftRoad.tscn"]
+
+[node name="Node2D" parent="currentLevel" instance=ExtResource("3_aiu1k")]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(480, 270)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-0.500008, 107.5)
+texture = ExtResource("4_2xw58")
+script = ExtResource("5_6ases")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_right = 1169.0
+offset_bottom = 46.0
+theme_override_fonts/normal_font = ExtResource("5_mfgmh")
+bbcode_enabled = true
+text = "Score:[shake][rainbow]1"
+script = ExtResource("6_v8rr0")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_glecp")
+volume_db = -10.307
+autoplay = true
+
+[connection signal="timeout" from="Timer" to="currentLevel" method="_on_timer_timeout"]

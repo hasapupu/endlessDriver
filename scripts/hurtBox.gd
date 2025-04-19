@@ -23,4 +23,6 @@ func _on_area_entered(hitbox: hitBox):
 		if hitbox.owner is player:
 			hitbox.owner.currentWorld = owner.worldToLoadName
 			get_tree().root.get_node("gameManager/currentLevel").shouldSpawnFLine = true
+			owner.announce()
 			call_deferred("queue_free")
+			

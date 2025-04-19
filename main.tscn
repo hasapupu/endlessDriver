@@ -50,7 +50,7 @@ autostart = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_glecp")
-volume_db = -10.307
+volume_db = -4.685
 autoplay = true
 
 [connection signal="timeout" from="Timer" to="currentLevel" method="_on_timer_timeout"]

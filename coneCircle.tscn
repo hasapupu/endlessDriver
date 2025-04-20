@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxl2bydjxums6"]
+
+[ext_resource type="PackedScene" uid="uid://d1bmtm1eclqty" path="res://coneProj.tscn" id="1_08uc4"]
+[ext_resource type="Script" path="res://scripts/coneCircle.gd" id="1_ye61s"]
+
+[node name="rotPivot" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_ye61s")
+
+[node name="Sprite2D" parent="." instance=ExtResource("1_08uc4")]
+position = Vector2(0, 40)
+
+[node name="Sprite2D2" parent="." instance=ExtResource("1_08uc4")]
+position = Vector2(0, -40)
+rotation = 3.14159
+
+[node name="Sprite2D3" parent="." instance=ExtResource("1_08uc4")]
+position = Vector2(-40, 0)
+rotation = 1.5708
+
+[node name="Sprite2D4" parent="." instance=ExtResource("1_08uc4")]
+position = Vector2(40, 0)
+rotation = 4.71465
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

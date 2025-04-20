@@ -13,13 +13,14 @@ func _on_area_entered(hitbox: hitBox):
 	if owner is player:
 		if hitbox.owner is enemy:
 			hitbox.owner.die()
-			owner.score -= 9
+			if owner.damageable == true:
+				owner.score -= 9
 	if get_parent() is pickup:
 		if hitbox.owner is player:
 			get_parent().spr.texture = get_parent().hitSprite 
 			get_parent().sound.play()
 			if hitbox.owner.currentItem == null:
-				hitbox.owner.currentItem = get_parent().itemDict[hitbox.owner.currentWorld].instantiate()
+				hitbox.owner.set_deferred("currentItem",get_parent().itemDict[hitbox.owner.currentWorld].instantiate())
 			call_deferred("queue_free")
 	if owner is finish:
 		if hitbox.owner is player:
@@ -28,5 +29,5 @@ func _on_area_entered(hitbox: hitBox):
 			owner.announce()
 			call_deferred("queue_free")
 	if owner is enemy:
-		if hitbox.owner.is_in_group("projectile"):
+		if hitbox.get_parent().is_in_group("projectile") or hitbox.owner.is_in_group("projectile"):
 			owner.die()			

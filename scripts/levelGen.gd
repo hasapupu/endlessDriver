@@ -37,7 +37,7 @@ func _ready():
 		print(cPos)
 
 func _on_timer_timeout():
-	for i in range(2):
-		#spawnEnemy(pl.currentWorld)
+	for i in range(1):
+		spawnEnemy(pl.currentWorld)
 		pass	
 

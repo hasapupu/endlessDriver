@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://kaaqxfk6txqk"]
+
+[ext_resource type="Shader" path="res://scripts/rainbow.gdshader" id="1_j88tu"]
+
+[resource]
+shader = ExtResource("1_j88tu")
+shader_parameter/horizontal_influence = 0.5
+shader_parameter/vertical_influence = 0.0

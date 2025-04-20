@@ -13,6 +13,7 @@ var brake = -450
 @onready var roadHitbox: Area2D = get_node("Area2D")
 var score := 1.0
 var currentWorld := "debug"
+var damageable := true
 var currentItem: item :
 	set(value):
 		currentItem = value 
@@ -48,7 +49,8 @@ func applyFric():
 	
 func getInput():
 	var turn = 0
-	if Input.is_action_just_pressed("item"):
+	if currentItem != null and Input.is_action_just_pressed("item"):
+		currentItem.sf.set_deferred("playing",  true)
 		currentItem.activate()
 	if Input.is_action_pressed("left"):
 		turn -= 1
@@ -70,7 +72,10 @@ func getInput():
 		breakPlayer.play()
 		pass
 	
-
+func _process(delta):
+	if score < 0:
+		get_tree().reload_current_scene()
+		
 func calculateSteering(delta):
 	var rearWheel = position - transform.x * wheelBase/2
 	var frontWheel = position + transform.x * wheelBase/2

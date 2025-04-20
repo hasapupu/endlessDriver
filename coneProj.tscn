@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1bmtm1eclqty"]
+
+[ext_resource type="Texture2D" uid="uid://dggcb0frxg7n1" path="res://cones2.png" id="1_p286y"]
+[ext_resource type="Script" path="res://scripts/hitBox.gd" id="2_7fkkj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4bec"]
+size = Vector2(16, 22)
+
+[node name="Sprite2D" type="Sprite2D" groups=["projectile"]]
+z_index = 3
+texture = ExtResource("1_p286y")
+region_enabled = true
+region_rect = Rect2(42.0497, 36.7434, 15.948, 22.2324)
+
+[node name="hitBox" type="Area2D" parent="."]
+script = ExtResource("2_7fkkj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+shape = SubResource("RectangleShape2D_f4bec")
+debug_color = Color(0.999273, 0, 0.118341, 0.42)

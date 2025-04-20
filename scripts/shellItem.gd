@@ -1,12 +1,13 @@
 extends item
 
-@onready var shell: CharacterBody2D = get_node("shell")
-
-func _ready():
-	shell.reparent(get_tree().root.get_node("gameManager/pp/player/shellPoint"),false)
-
 func activate():
-	shell.velocity = get_tree().root.get_node("gameManager/pp/player").velocity * 3.5
-	shell.reparent(get_tree().root.get_node("gameManager"),true)
+	nodeBody.velocity = get_tree().root.get_node("gameManager/pp/player").velocity * 3.5
+	nodeBody.reparent(get_tree().root.get_node("gameManager"),true)
+	
+func _on_finished():
 	call_deferred("queue_free")
 	
+
+
+func _on_timer_timeout():
+	pass # Replace with function body.
